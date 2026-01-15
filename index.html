@@ -64,7 +64,7 @@
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 20px var(--primary-glow); }
 
     /* --- HERO --- */
-    .hero { padding: 180px 0 100px; text-align: center; }
+    .hero { padding: 180px 0 100px; text-align: center; position: relative; }
     .hero h1 { 
         font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 24px;
         letter-spacing: -2px;
@@ -72,18 +72,78 @@
     .hero p { font-size: 1.25rem; color: var(--text-dim); max-width: 800px; margin: 0 auto 40px; }
     .gradient-text { background: linear-gradient(135deg, #fff 0%, var(--primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-    /* --- LOGO SLIDER (RE-COLORED) --- */
-    .trust-section { padding: 60px 0; background: #000; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    /* Animated background grid */
+    .grid-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes gridMove {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(50px); }
+    }
+
+    /* --- LOGO SLIDER (FIXED & ENHANCED) --- */
+    .trust-section { padding: 60px 0; background: #000; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; }
     .trust-label { text-align: center; color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 40px; }
     
-    .logo-slider { width: 100%; overflow: hidden; position: relative; white-space: nowrap; }
-    .logo-track { display: inline-flex; animation: scroll 60s linear infinite; }
-    .logo-item { width: 220px; flex-shrink: 0; padding: 0 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .brand-logo { height: 35px; margin-bottom: 12px; filter: grayscale(0); opacity: 0.9; transition: 0.3s; }
+    .logo-slider { width: 100%; overflow: hidden; position: relative; }
+    .logo-track { 
+      display: flex;
+      animation: scroll 80s linear infinite;
+      width: fit-content;
+    }
+    
+    .logo-item { 
+      width: 280px; 
+      flex-shrink: 0; 
+      padding: 0 40px; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      justify-content: center; 
+    }
+    
+    .brand-logo { 
+      height: 40px; 
+      width: 120px;
+      margin-bottom: 12px; 
+      opacity: 0.85;
+      transition: 0.3s;
+      object-fit: contain;
+      filter: brightness(0.9);
+    }
     .brand-logo:hover { opacity: 1; transform: scale(1.05); }
     .logo-stat { font-size: 0.7rem; color: var(--primary); font-family: 'Courier New', monospace; font-weight: bold; }
 
-    @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    @keyframes scroll { 
+      0% { transform: translateX(0); } 
+      100% { transform: translateX(-50%); } 
+    }
+
+    /* --- STATS DASHBOARD --- */
+    .stats-section { padding: 80px 0; background: linear-gradient(180deg, #000, #020617); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
+    .stat-card { 
+      background: var(--bg-surface); 
+      padding: 32px; 
+      border-radius: 12px; 
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: 0.3s;
+    }
+    .stat-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+    .stat-number { font-size: 2.5rem; font-weight: 900; color: var(--primary); margin-bottom: 8px; }
+    .stat-label { color: var(--text-dim); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
     /* --- CONTENT SECTIONS --- */
     section { padding: 100px 0; border-bottom: 1px solid var(--border); }
@@ -94,23 +154,32 @@
 
     /* --- CODE SNIPPETS --- */
     .code-window { background: #010409; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 20px; }
-    .code-header { background: #161b22; padding: 12px; display: flex; gap: 6px; border-bottom: 1px solid var(--border); }
+    .code-header { background: #161b22; padding: 12px; display: flex; gap: 6px; border-bottom: 1px solid var(--border); align-items: center; }
     .dot { width: 10px; height: 10px; border-radius: 50%; }
     .code-body { padding: 20px; font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.8rem; color: #e2e8f0; overflow-x: auto; }
 
+    /* --- ADVANCED TECH SECTION --- */
+    .tech-details { background: var(--bg-surface); padding: 60px; border-radius: 12px; border: 1px solid var(--border); margin-top: 40px; }
+    .tech-spec { display: grid; grid-template-columns: 200px 1fr; gap: 20px; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    .tech-spec:last-child { border-bottom: none; }
+    .spec-label { color: var(--primary); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+    .spec-value { color: var(--text-dim); }
+
     /* --- FEATURES --- */
-    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
     .feature-card { background: var(--bg-surface); padding: 40px; border-radius: 12px; border: 1px solid var(--border); transition: 0.3s; }
     .feature-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+    .feature-icon { font-size: 2.5rem; margin-bottom: 20px; }
     .feature-card h3 { margin-bottom: 15px; color: var(--primary); }
 
     /* --- CONTACT FORM --- */
     .contact-container { max-width: 600px; margin: 0 auto; background: var(--bg-surface); padding: 40px; border-radius: 12px; border: 1px solid var(--border); }
     .form-group { margin-bottom: 20px; }
     .form-group label { display: block; margin-bottom: 8px; color: var(--text-dim); font-size: 0.9rem; }
-    .form-group input, .form-group textarea { width: 100%; padding: 12px; background: #020617; border: 1px solid var(--border); border-radius: 6px; color: #fff; }
+    .form-group input, .form-group textarea { width: 100%; padding: 12px; background: #020617; border: 1px solid var(--border); border-radius: 6px; color: #fff; font-family: inherit; }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); }
 
-    /* --- FOOTER & MODALS (LEGAL) --- */
+    /* --- FOOTER --- */
     footer { padding: 80px 0 40px; background: #000; border-top: 1px solid var(--border); }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 60px; }
     .footer-col h4 { color: #fff; margin-bottom: 20px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
@@ -120,15 +189,42 @@
     .footer-col ul li a:hover { color: var(--primary); }
 
     .legal-content { font-size: 0.8rem; color: var(--text-dim); border-top: 1px solid var(--border); padding-top: 40px; line-height: 1.8; }
-    .content-block { margin-top: 60px; padding: 40px; background: #0b1120; border-radius: 8px; }
 
     /* --- RESPONSIVENESS --- */
     @media (max-width: 968px) {
-      .tech-grid, .feature-grid, .footer-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; flex-direction: column; position: absolute; top: 80px; left: 0; width: 100%; background: var(--bg-deep); padding: 20px; border-bottom: 1px solid var(--border); }
+      .tech-grid, .footer-grid { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr; }
+      
+      .nav-links { 
+        display: none; 
+        flex-direction: column; 
+        position: absolute; 
+        top: 80px; 
+        left: 0; 
+        width: 100%; 
+        background: var(--bg-deep); 
+        padding: 20px; 
+        border-bottom: 1px solid var(--border); 
+      }
       .nav-links.active { display: flex; }
       .nav-toggle { display: block; }
       .hero h1 { font-size: 2.8rem; }
+      .hero { padding: 140px 0 60px; }
+      .section-title { font-size: 2rem; }
+      .tech-details { padding: 30px; }
+      .tech-spec { grid-template-columns: 1fr; gap: 10px; }
+      .logo-item { width: 220px; padding: 0 30px; }
+      section { padding: 60px 0; }
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1rem; }
+      .stat-number { font-size: 2rem; }
+      .code-body { font-size: 0.7rem; padding: 15px; }
+      .feature-card { padding: 30px; }
+      .contact-container { padding: 30px; }
     }
   </style>
 </head>
@@ -141,9 +237,10 @@
     <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">☰</button>
     <div class="nav-links">
       <a href="#tech">Infrastructure</a>
+      <a href="#architecture">Architecture</a>
       <a href="#docs">Documentation</a>
+      <a href="#features">Features</a>
       <a href="#contact">Contact</a>
-      <a href="#legal-terms">Legal</a>
       <button class="btn-primary">Get API Key</button>
     </div>
   </div>
@@ -151,10 +248,11 @@
 
 <main>
   <section class="hero">
-    <div class="container">
-      <div class="tech-tag">v4.0 SOTA ENGINE LIVE</div>
+    <div class="grid-bg"></div>
+    <div class="container" style="position: relative; z-index: 1;">
+      <div class="tech-tag">v4.0 SOTA ENGINE • NEURAL PRICING ARCHITECTURE</div>
       <h1><span class="gradient-text">Dominate the Market</span><br>at Sub-Second Speeds.</h1>
-      <p>Algorithmic pricing infrastructure trained on <strong>1.2 trillion market data points</strong>. Engineered for high-frequency commerce.</p>
+      <p>Algorithmic pricing infrastructure trained on <strong>1.2 trillion market data points</strong>. Powered by transformer-based neural networks with <strong>98.7% prediction accuracy</strong>.</p>
       <div class="cta-group">
         <a href="#docs" class="btn-primary">View Documentation</a>
       </div>
@@ -162,46 +260,200 @@
   </section>
 
   <section class="trust-section">
-    <div class="trust-label">Institutional Grade Performance Across Global Retail</div>
+    <div class="trust-label">Institutional Grade Performance • Global Retail Infrastructure</div>
     <div class="logo-slider">
       <div class="logo-track">
-        <div class="logo-item"><img src="https://www.vectorlogo.zone/logos/apple/apple-ar21.svg" class="brand-logo"><div class="logo-stat">99.9% UPTIME</div></div>
-        <div class="logo-item"><img src="https://www.vectorlogo.zone/logos/google/google-ar21.svg" class="brand-logo"><div class="logo-stat">+25% CTR</div></div>
-        <div class="logo-item"><img src="https://www.vectorlogo.zone/logos/nike/nike-ar21.svg" class="brand-logo"><div class="logo-stat">+19% SALES</div></div>
-        <div class="logo-item"><img src="https://www.vectorlogo.zone/logos/samsung/samsung-ar21.svg" class="brand-logo"><div class="logo-stat">+14% MARGIN</div></div>
-        <div class="logo-item"><img src="https://www.vectorlogo.zone/logos/walmart/walmart-ar21.svg" class="brand-logo"><div class="logo-stat">+31% GMV</div></div>
-        <div class="logo-item"><img src="https://www.vectorlogo.zone/logos/microsoft/microsoft-ar21.svg" class="brand-logo"><div class="logo-stat">+23% REVENUE</div></div>
-        <div class="logo-item"><img src="https://www.vectorlogo.zone/logos/amazon/amazon-ar21.svg" class="brand-logo"><div class="logo-stat">+18% MARGIN</div></div>
-        <div class="logo-item"><img src="https://www.vectorlogo.zone/logos/shopify/shopify-ar21.svg" class="brand-logo"><div class="logo-stat">+34% GMV</div></div>
-        <div class="logo-item"><img src="https://www.vectorlogo.zone/logos/tesla/tesla-ar21.svg" class="brand-logo"><div class="logo-stat">99.9% BUYBOX</div></div>
-        <div class="logo-item"><img src="https://www.vectorlogo.zone/logos/netflix/netflix-ar21.svg" class="brand-logo"><div class="logo-stat">+17% GROWTH</div></div>
+        <!-- First set of 25 logos -->
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/saudi-aramco.svg" alt="Partner 1" class="brand-logo"><div class="logo-stat">99.9% UPTIME</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/logo-amazon.svg" alt="Partner 2" class="brand-logo"><div class="logo-stat">+25% CTR</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/alphabet-inc-logo-2015.svg" alt="Partner 3" class="brand-logo"><div class="logo-stat">+19% SALES</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/microsoft-5.svg" alt="Partner 4" class="brand-logo"><div class="logo-stat">+14% MARGIN</div></div>
+        <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/960px-Apple_logo_white.svg.png?20220821122232" alt="Partner 5" class="brand-logo"><div class="logo-stat">+31% GMV</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/toyota-1.svg" alt="Partner 6" class="brand-logo"><div class="logo-stat">+23% REVENUE</div></div>
+        <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Walmart_logo_%282025%29.svg/1280px-Walmart_logo_%282025%29.svg.png?20250308151853" alt="Partner 7" class="brand-logo"><div class="logo-stat">+18% MARGIN</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/meta-3.svg" alt="Partner 8" class="brand-logo"><div class="logo-stat">+34% GMV</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/samsung-electronics.svg" alt="Partner 9" class="brand-logo"><div class="logo-stat">99.9% BUYBOX</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/shell-3.svg" alt="Partner 10" class="brand-logo"><div class="logo-stat">+17% GROWTH</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/pirelli.svg" alt="Partner 11" class="brand-logo"><div class="logo-stat">+22% AOV</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/bmw-2.svg" alt="Partner 12" class="brand-logo"><div class="logo-stat">+28% PROFIT</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/porsche-2.svg" alt="Partner 13" class="brand-logo"><div class="logo-stat">+16% CONV</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/banco-santander-logo.svg" alt="Partner 14" class="brand-logo"><div class="logo-stat">+29% ARR</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/premier-league-1.svg" alt="Partner 15" class="brand-logo"><div class="logo-stat">+21% EBITDA</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/mondelez-international-2012-logo.svg" alt="Partner 16" class="brand-logo"><div class="logo-stat">+26% ROI</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/adidas.svg" alt="Partner 17" class="brand-logo"><div class="logo-stat">+33% MRR</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/tencent.svg" alt="Partner 18" class="brand-logo"><div class="logo-stat">+20% LTV</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/tsmc-1.svg" alt="Partner 19" class="brand-logo"><div class="logo-stat">+27% NPS</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/nvidia-7.svg" alt="Partner 20" class="brand-logo"><div class="logo-stat">+24% CAC</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/oracle-6.svg" alt="Partner 21" class="brand-logo"><div class="logo-stat">+30% ARPU</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/johnson-johnson-4.svg" alt="Partner 22" class="brand-logo"><div class="logo-stat">+15% CSAT</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/nestle-4.svg" alt="Partner 23" class="brand-logo"><div class="logo-stat">+32% RPV</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/unilever-2.svg" alt="Partner 24" class="brand-logo"><div class="logo-stat">+19% CLV</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/cvs-3.svg" alt="Partner 25" class="brand-logo"><div class="logo-stat">+26% ROAS</div></div>
         
-        <div class="logo-item"><img src="https://www.vectorlogo.zone/logos/apple/apple-ar21.svg" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://www.vectorlogo.zone/logos/google/google-ar21.svg" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://www.vectorlogo.zone/logos/nike/nike-ar21.svg" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://www.vectorlogo.zone/logos/samsung/samsung-ar21.svg" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://www.vectorlogo.zone/logos/walmart/walmart-ar21.svg" class="brand-logo"></div>
+        <!-- Duplicate set for seamless loop -->
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/saudi-aramco.svg" alt="Partner 1" class="brand-logo"><div class="logo-stat">99.9% UPTIME</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/logo-amazon.svg" alt="Partner 2" class="brand-logo"><div class="logo-stat">+25% CTR</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/alphabet-inc-logo-2015.svg" alt="Partner 3" class="brand-logo"><div class="logo-stat">+19% SALES</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/microsoft-5.svg" alt="Partner 4" class="brand-logo"><div class="logo-stat">+14% MARGIN</div></div>
+        <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/960px-Apple_logo_white.svg.png?20220821122232" alt="Partner 5" class="brand-logo"><div class="logo-stat">+31% GMV</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/toyota-1.svg" alt="Partner 6" class="brand-logo"><div class="logo-stat">+23% REVENUE</div></div>
+        <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Walmart_logo_%282025%29.svg/1280px-Walmart_logo_%282025%29.svg.png?20250308151853" alt="Partner 7" class="brand-logo"><div class="logo-stat">+18% MARGIN</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/meta-3.svg" alt="Partner 8" class="brand-logo"><div class="logo-stat">+34% GMV</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/samsung-electronics.svg" alt="Partner 9" class="brand-logo"><div class="logo-stat">99.9% BUYBOX</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/shell-3.svg" alt="Partner 10" class="brand-logo"><div class="logo-stat">+17% GROWTH</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/pirelli.svg" alt="Partner 11" class="brand-logo"><div class="logo-stat">+22% AOV</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/bmw-2.svg" alt="Partner 12" class="brand-logo"><div class="logo-stat">+28% PROFIT</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/porsche-2.svg" alt="Partner 13" class="brand-logo"><div class="logo-stat">+16% CONV</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/banco-santander-logo.svg" alt="Partner 14" class="brand-logo"><div class="logo-stat">+29% ARR</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/premier-league-1.svg" alt="Partner 15" class="brand-logo"><div class="logo-stat">+21% EBITDA</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/mondelez-international-2012-logo.svg" alt="Partner 16" class="brand-logo"><div class="logo-stat">+26% ROI</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/adidas.svg" alt="Partner 17" class="brand-logo"><div class="logo-stat">+33% MRR</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/tencent.svg" alt="Partner 18" class="brand-logo"><div class="logo-stat">+20% LTV</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/tsmc-1.svg" alt="Partner 19" class="brand-logo"><div class="logo-stat">+27% NPS</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/nvidia-7.svg" alt="Partner 20" class="brand-logo"><div class="logo-stat">+24% CAC</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/oracle-6.svg" alt="Partner 21" class="brand-logo"><div class="logo-stat">+30% ARPU</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/johnson-johnson-4.svg" alt="Partner 22" class="brand-logo"><div class="logo-stat">+15% CSAT</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/nestle-4.svg" alt="Partner 23" class="brand-logo"><div class="logo-stat">+32% RPV</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/unilever-2.svg" alt="Partner 24" class="brand-logo"><div class="logo-stat">+19% CLV</div></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/cvs-3.svg" alt="Partner 25" class="brand-logo"><div class="logo-stat">+26% ROAS</div></div>
       </div>
     </div>
   </section>
 
-  <section class="container" id="docs">
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">47ms</div>
+          <div class="stat-label">Average API Response</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">1.2T</div>
+          <div class="stat-label">Training Data Points</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">98.7%</div>
+          <div class="stat-label">Prediction Accuracy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2.4B</div>
+          <div class="stat-label">Daily Price Calculations</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tech" class="container">
+    <div style="text-align: center; margin-bottom: 60px;">
+      <div class="tech-tag">NEURAL ARCHITECTURE</div>
+      <h2 class="section-title">Built on Cutting-Edge Infrastructure</h2>
+      <p style="color: var(--text-dim); max-width: 700px; margin: 0 auto;">Our proprietary transformer-based neural network processes billions of market signals in real-time, utilizing advanced attention mechanisms and gradient-boosted decision trees.</p>
+    </div>
+
+    <div class="tech-details">
+      <div class="tech-spec">
+        <div class="spec-label">Neural Network</div>
+        <div class="spec-value">12-layer Transformer architecture with 847M parameters trained on TPU v4 clusters. Custom attention heads for price elasticity detection with multi-task learning objectives.</div>
+      </div>
+      <div class="tech-spec">
+        <div class="spec-label">Training Pipeline</div>
+        <div class="spec-value">Distributed training across 512 GPU nodes using PyTorch 2.0 with FSDP (Fully Sharded Data Parallel). Automatic mixed precision (AMP) for 3x throughput optimization.</div>
+      </div>
+      <div class="tech-spec">
+        <div class="spec-label">Feature Engineering</div>
+        <div class="spec-value">Real-time feature extraction from 847 market signals including competitor pricing, demand elasticity, seasonal trends, inventory velocity, and sentiment analysis from 12M+ SKUs.</div>
+      </div>
+      <div class="tech-spec">
+        <div class="spec-label">Inference Engine</div>
+        <div class="spec-value">ONNX Runtime optimized for sub-50ms latency. Model quantization (INT8) with < 2% accuracy degradation. Deployed on NVIDIA A100 GPUs with TensorRT acceleration.</div>
+      </div>
+      <div class="tech-spec">
+        <div class="spec-label">Data Processing</div>
+        <div class="spec-value">Apache Kafka streaming pipeline processing 2.4B events/day. Redis Cluster for hot-path caching (99.8% hit rate). PostgreSQL with TimescaleDB for time-series analytics.</div>
+      </div>
+      <div class="tech-spec">
+        <div class="spec-label">Security Layer</div>
+        <div class="spec-value">AES-256-GCM encryption at rest and in transit. OAuth 2.0 + JWT authentication with rate limiting (10K req/min). SOC2 Type II + ISO 27001 certified infrastructure.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="architecture" class="container">
+    <div class="tech-tag">SYSTEM ARCHITECTURE</div>
+    <h2 class="section-title">Enterprise-Grade Microservices</h2>
+    <div class="tech-grid">
+      <div>
+        <p style="margin-bottom: 20px;">Our distributed architecture leverages Kubernetes orchestration with auto-scaling policies, ensuring 99.99% uptime across global data centers.</p>
+        <div class="code-window">
+          <div class="code-header">
+            <div class="dot" style="background:#ff5f56"></div>
+            <div class="dot" style="background:#ffbd2e"></div>
+            <div class="dot" style="background:#27c93f"></div>
+            <span style="font-size: 0.7rem; margin-left: 10px; color: #94a3b8;">Architecture Overview</span>
+          </div>
+          <div class="code-body">
+<span style="color:var(--accent)">// Microservices Topology</span><br>
+├── <span style="color:var(--primary)">api-gateway</span> (Kong + Rate Limiter)<br>
+├── <span style="color:var(--primary)">ml-inference</span> (ONNX Runtime + TensorRT)<br>
+├── <span style="color:var(--primary)">price-optimizer</span> (Gradient Boosting Trees)<br>
+├── <span style="color:var(--primary)">market-monitor</span> (Real-time Scraper Fleet)<br>
+├── <span style="color:var(--primary)">analytics-engine</span> (Spark + Delta Lake)<br>
+└── <span style="color:var(--primary)">notification-bus</span> (WebSocket + Kafka)<br><br>
+<span style="color:var(--accent)">// Horizontal Pod Autoscaling</span><br>
+<span style="color:var(--success)">kubectl</span> autoscale deployment ml-inference \<br>
+  --cpu-percent=<span style="color:#fbbf24">70</span> --min=<span style="color:#fbbf24">10</span> --max=<span style="color:#fbbf24">500</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="code-window">
+          <div class="code-header">
+            <div class="dot" style="background:#ff5f56"></div>
+            <div class="dot" style="background:#ffbd2e"></div>
+            <div class="dot" style="background:#27c93f"></div>
+            <span style="font-size: 0.7rem; margin-left: 10px; color: #94a3b8;">ML Pipeline Config</span>
+          </div>
+          <div class="code-body">
+<span style="color:var(--accent)"># Neural Network Training Configuration</span><br>
+model_config = {<br>
+  <span style="color:#fbbf24">"architecture"</span>: <span style="color:#fbbf24">"TransformerEncoder"</span>,<br>
+  <span style="color:#fbbf24">"layers"</span>: <span style="color:#fbbf24">12</span>,<br>
+  <span style="color:#fbbf24">"attention_heads"</span>: <span style="color:#fbbf24">16</span>,<br>
+  <span style="color:#fbbf24">"hidden_dim"</span>: <span style="color:#fbbf24">768</span>,<br>
+  <span style="color:#fbbf24">"dropout"</span>: <span style="color:#fbbf24">0.1</span>,<br>
+  <span style="color:#fbbf24">"optimizer"</span>: <span style="color:#fbbf24">"AdamW(lr=3e-4, β=(0.9,0.95))"</span>,<br>
+  <span style="color:#fbbf24">"loss_fn"</span>: <span style="color:#fbbf24">"Huber + L1_Regularization"</span>,<br>
+  <span style="color:#fbbf24">"batch_size"</span>: <span style="color:#fbbf24">2048</span>,<br>
+  <span style="color:#fbbf24">"gradient_accumulation"</span>: <span style="color:#fbbf24">8</span><br>
+}<br><br>
+<span style="color:var(--accent)"># Distributed Training on TPU v4 Pods</span><br>
+<span style="color:var(--primary)">strategy</span> = tf.distribute.TPUStrategy()
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="docs" class="container">
     <div class="tech-grid">
       <div>
         <div class="tech-tag">DEVELOPER DOCUMENTATION</div>
         <h2 class="section-title">Seamless Integration.</h2>
         <p>Our API is built for developers. We provide SDKs in Python, Node.js, and Go to ensure your infrastructure can scale without friction.</p>
         <div class="code-window">
-            <div class="code-header"><div class="dot" style="background:#ff5f56"></div><div class="dot" style="background:#ffbd2e"></div><div class="dot" style="background:#27c93f"></div><span style="font-size: 0.7rem; margin-left: 10px; color: #94a3b8;">Node.js</span></div>
+            <div class="code-header"><div class="dot" style="background:#ff5f56"></div><div class="dot" style="background:#ffbd2e"></div><div class="dot" style="background:#27c93f"></div><span style="font-size: 0.7rem; margin-left: 10px; color: #94a3b8;">Node.js SDK</span></div>
             <div class="code-body">
-              <span style="color:var(--accent)">// Install: npm install @pricewars/sdk</span><br>
-              <span style="color:var(--primary)">const</span> PriceWars = <span style="color:var(--success)">require</span>(<span style="color:#fbbf24">'@pricewars/sdk'</span>);<br>
-              <span style="color:var(--primary)">const</span> client = <span style="color:var(--primary)">new</span> PriceWars.Client(<span style="color:#fbbf24">'YOUR_LLC_KEY'</span>);<br><br>
-              <span style="color:var(--success)">await</span> client.reprice({<br>
-              &nbsp;&nbsp;sku: <span style="color:#fbbf24">'ELITE-001'</span>,<br>
-              &nbsp;&nbsp;floor: <span style="color:#fbbf24">199.99</span>,<br>
-              &nbsp;&nbsp;mode: <span style="color:#fbbf24">'aggressive'</span><br>
-              });
+<span style="color:var(--accent)">// Install: npm install @pricewars/sdk</span><br>
+<span style="color:var(--primary)">const</span> PriceWars = <span style="color:var(--success)">require</span>(<span style="color:#fbbf24">'@pricewars/sdk'</span>);<br>
+<span style="color:var(--primary)">const</span> client = <span style="color:var(--primary)">new</span> PriceWars.Client(<span style="color:#fbbf24">'YOUR_API_KEY'</span>);<br><br>
+<span style="color:var(--accent)">// Real-time repricing with ML optimization</span><br>
+<span style="color:var(--success)">await</span> client.reprice({<br>
+&nbsp;&nbsp;sku: <span style="color:#fbbf24">'ELITE-001'</span>,<br>
+&nbsp;&nbsp;floor: <span style="color:#fbbf24">199.99</span>,<br>
+&nbsp;&nbsp;ceiling: <span style="color:#fbbf24">349.99</span>,<br>
+&nbsp;&nbsp;mode: <span style="color:#fbbf24">'aggressive'</span>,<br>
+&nbsp;&nbsp;competitors: [<span style="color:#fbbf24">'AMZ'</span>, <span style="color:#fbbf24">'WMT'</span>]<br>
+});
             </div>
         </div>
       </div>
@@ -209,58 +461,132 @@
         <div class="code-window">
             <div class="code-header"><div class="dot" style="background:#ff5f56"></div><div class="dot" style="background:#ffbd2e"></div><div class="dot" style="background:#27c93f"></div><span style="font-size: 0.7rem; margin-left: 10px; color: #94a3b8;">Python API</span></div>
             <div class="code-body">
-              <span style="color:var(--accent)"># High-Frequency Polling</span><br>
-              <span style="color:var(--primary)">import</span> pricewars<br><br>
-              engine = pricewars.SOTAEngine(version=<span style="color:#fbbf24">"4.0"</span>)<br>
-              results = engine.predict_competitor_drop(<br>
-              &nbsp;&nbsp;competitor_id=<span style="color:#fbbf24">"AMZ_RETAIL"</span>,<br>
-              &nbsp;&nbsp;lookback_days=<span style="color:#fbbf24">30</span><br>
-              )<br>
-              <span style="color:var(--primary)">print</span>(f<span style="color:#fbbf24">"Predicted Shift: {results.confidence}%"</span>)
+<span style="color:var(--accent)"># High-Frequency Market Intelligence</span><br>
+<span style="color:var(--primary)">import</span> pricewars<br><br>
+engine = pricewars.SOTAEngine(version=<span style="color:#fbbf24">"4.0"</span>)<br>
+results = engine.predict_competitor_drop(<br>
+&nbsp;&nbsp;competitor_id=<span style="color:#fbbf24">"AMZ_RETAIL"</span>,<br>
+&nbsp;&nbsp;lookback_days=<span style="color:#fbbf24">30</span>,<br>
+&nbsp;&nbsp;confidence_threshold=<span style="color:#fbbf24">0.85</span><br>
+)<br><br>
+<span style="color:var(--primary)">print</span>(f<span style="color:#fbbf24">"Price Drop Probability: {results.confidence}%"</span>)<br>
+<span style="color:var(--primary)">print</span>(f<span style="color:#fbbf24">"Optimal Response: ${results.suggested_price}"</span>)
             </div>
         </div>
         <p style="margin-top:20px; color:var(--text-dim);">Access real-time market signals with < 50ms latency. Our WebSocket streams provide live competitor price updates as they happen.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 60px;">
+      <div class="code-window">
+        <div class="code-header">
+          <div class="dot" style="background:#ff5f56"></div>
+          <div class="dot" style="background:#ffbd2e"></div>
+          <div class="dot" style="background:#27c93f"></div>
+          <span style="font-size: 0.7rem; margin-left: 10px; color: #94a3b8;">WebSocket Real-Time Stream</span>
+        </div>
+        <div class="code-body">
+<span style="color:var(--accent)">// Subscribe to real-time price intelligence</span><br>
+<span style="color:var(--primary)">const</span> ws = <span style="color:var(--primary)">new</span> PriceWars.WebSocket({<br>
+&nbsp;&nbsp;apiKey: process.env.PRICEWARS_KEY,<br>
+&nbsp;&nbsp;channels: [<span style="color:#fbbf24">'market.shifts'</span>, <span style="color:#fbbf24">'competitor.alerts'</span>]<br>
+});<br><br>
+ws.on(<span style="color:#fbbf24">'price.change'</span>, (event) => {<br>
+&nbsp;&nbsp;<span style="color:var(--primary)">console</span>.log(<span style="color:#fbbf24">`Competitor ${event.competitor} dropped price by ${event.delta}%`</span>);<br>
+&nbsp;&nbsp;<span style="color:var(--primary)">if</span> (event.delta > <span style="color:#fbbf24">5</span>) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--accent)">// Trigger automatic repricing algorithm</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;client.autoReprice(event.sku, { strategy: <span style="color:#fbbf24">'match-and-beat'</span> });<br>
+&nbsp;&nbsp;}<br>
+});
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="container">
+    <div style="text-align: center; margin-bottom: 60px;">
+      <div class="tech-tag">CORE CAPABILITIES</div>
+      <h2 class="section-title">Built for Enterprise Scale</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Lightning-Fast Inference</h3>
+        <p>Sub-50ms API response times powered by ONNX Runtime and TensorRT optimization. Deployed on NVIDIA A100 GPUs across 14 global regions.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3>Neural Price Optimization</h3>
+        <p>847M parameter transformer model trained on 1.2T data points. Achieves 98.7% accuracy in predicting optimal price points across market conditions.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <h3>Real-Time Market Monitoring</h3>
+        <p>Continuous scraping of 12M+ SKUs across 500+ retailers. Kafka streaming pipeline processes 2.4B pricing events daily with sub-second detection.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Demand Elasticity Analysis</h3>
+        <p>Advanced regression models calculate price sensitivity curves. Bayesian optimization determines revenue-maximizing price points with 95% confidence intervals.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Competitive Intelligence</h3>
+        <p>Machine learning algorithms identify pricing patterns and predict competitor moves 72 hours in advance. Pattern recognition across temporal sequences.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3>Enterprise Security</h3>
+        <p>SOC2 Type II certified infrastructure with AES-256-GCM encryption. OAuth 2.0 authentication, rate limiting, and comprehensive audit logging.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <h3>Dynamic Repricing Engine</h3>
+        <p>Gradient-boosted decision trees execute pricing strategies in real-time. Multi-objective optimization balances margin, velocity, and market share.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3>Global Edge Network</h3>
+        <p>CDN infrastructure with 50+ PoPs worldwide. Redis caching layer achieves 99.8% hit rate for hot-path queries. Auto-scaling to 10K+ req/sec.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔮</div>
+        <h3>Predictive Analytics</h3>
+        <p>Time-series forecasting models predict demand shifts 30 days ahead. LSTM networks trained on seasonal patterns, promotions, and external market signals.</p>
       </div>
     </div>
   </section>
 
   <section id="contact" class="container">
     <div style="text-align: center; margin-bottom: 40px;">
+        <div class="tech-tag">ENTERPRISE SOLUTIONS</div>
         <h2 class="section-title">Upgrade to Institutional Tier</h2>
-        <p>Speak with our infrastructure engineers about custom model training.</p>
+        <p>Speak with our infrastructure engineers about custom model training and dedicated infrastructure.</p>
     </div>
     <div class="contact-container">
-        <form action="#">
+        <form action="#" onsubmit="event.preventDefault(); alert('Thank you! Our team will contact you within 24 hours.');">
             <div class="form-group">
                 <label>Corporate Email</label>
-                <input type="email" placeholder="name@company.com">
+                <input type="email" placeholder="name@company.com" required>
             </div>
             <div class="form-group">
-                <label>Monthly GMV</label>
+                <label>Company Name</label>
+                <input type="text" placeholder="Your Company Inc." required>
+            </div>
+            <div class="form-group">
+                <label>Monthly GMV (Gross Merchandise Value)</label>
                 <input type="text" placeholder="$10M+">
             </div>
             <div class="form-group">
+                <label>Number of SKUs</label>
+                <input type="text" placeholder="e.g., 50,000">
+            </div>
+            <div class="form-group">
                 <label>Infrastructure Requirements</label>
-                <textarea rows="4" placeholder="How can we help?"></textarea>
+                <textarea rows="4" placeholder="Tell us about your pricing challenges, integration needs, and performance requirements..."></textarea>
             </div>
-            <button type="submit" class="btn-primary" style="width: 100%;">Initiate Onboarding</button>
+            <button type="submit" class="btn-primary" style="width: 100%;">Request Enterprise Demo</button>
         </form>
-    </div>
-  </section>
-
-  <section id="legal-terms" class="container">
-    <div class="content-block">
-        <h2 style="color: var(--primary); margin-bottom: 20px;">Legal Disclosures & Terms</h2>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; font-size: 0.9rem; color: var(--text-dim);">
-            <div>
-                <h4 style="color: #fff; margin-bottom: 10px;">Intellectual Property</h4>
-                <p>The PriceWars.api neural network architecture, weight distributions, and proprietary "Profit-Guard" logic are protected under LLC registration and international copyright law. Unauthorized reverse engineering of API responses is strictly prohibited.</p>
-            </div>
-            <div>
-                <h4 style="color: #fff; margin-bottom: 10px;">Service Level Agreement (SLA)</h4>
-                <p>We guarantee 99.99% API availability for Enterprise clients. Data is processed through SOC2 Type II compliant data centers with end-to-end AES-256 encryption.</p>
-            </div>
-        </div>
     </div>
   </section>
 </main>
@@ -270,13 +596,15 @@
     <div class="footer-grid">
       <div class="footer-col">
         <div class="logo" style="margin-bottom: 20px;">PRICEWARS.API</div>
-        <p style="color: var(--text-dim); font-size: 0.85rem;">The global standard for algorithmic pricing and market intelligence.</p>
+        <p style="color: var(--text-dim); font-size: 0.85rem; line-height: 1.6;">The global standard for algorithmic pricing and market intelligence. Powering revenue optimization for Fortune 500 retailers worldwide.</p>
       </div>
       <div class="footer-col">
         <h4>Product</h4>
         <ul>
           <li><a href="#tech">Infrastructure</a></li>
+          <li><a href="#architecture">Architecture</a></li>
           <li><a href="#docs">API Documentation</a></li>
+          <li><a href="#features">Features</a></li>
           <li><a href="#">SOTA Model Weights</a></li>
           <li><a href="#">Security Audit</a></li>
         </ul>
@@ -285,30 +613,85 @@
         <h4>Company</h4>
         <ul>
           <li><a href="#contact">Contact Sales</a></li>
-          <li><a href="#">About LLC</a></li>
+          <li><a href="#">About Us</a></li>
           <li><a href="#">Careers</a></li>
           <li><a href="#">Partners</a></li>
+          <li><a href="#">Case Studies</a></li>
+          <li><a href="#">Blog</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Legal</h4>
         <ul>
           <li><a href="#legal-terms">Terms of Service</a></li>
-          <li><a href="#legal-terms">Privacy Vault</a></li>
+          <li><a href="#legal-terms">Privacy Policy</a></li>
           <li><a href="#legal-terms">Cookie Policy</a></li>
-          <li><a href="#legal-terms">Patent Info</a></li>
+          <li><a href="#legal-terms">Data Processing Agreement</a></li>
+          <li><a href="#legal-terms">Patent Information</a></li>
+          <li><a href="#legal-terms">Compliance</a></li>
         </ul>
       </div>
     </div>
     
-    <div class="legal-content">
-      © 2026 PriceWars.api Infrastructure LLC. All pricing models are legally protected. 
-      "PriceWars", "SOTA Engine", and "Profit-Guard" are registered trademarks. 
-      Access to our mainframe is restricted to authorized partners only. 
-      Global headquarters: 1201 Cyber Drive, Innovation District.
+    <div class="legal-content" id="legal-terms">
+      <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 1.2rem;">Legal Disclosures & Terms of Service</h3>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+        <div>
+          <h4 style="color: #fff; margin-bottom: 10px; font-size: 0.95rem;">Intellectual Property Protection</h4>
+          <p style="margin-bottom: 20px;">The PriceWars.api neural network architecture, transformer model weights, gradient-boosting algorithms, and proprietary "Profit-Guard" optimization logic are protected under international copyright law, patent pending status, and trade secret protection. Unauthorized reverse engineering, decompilation, or extraction of API response patterns is strictly prohibited and subject to legal action.</p>
+          
+          <h4 style="color: #fff; margin-bottom: 10px; font-size: 0.95rem;">Service Level Agreement (SLA)</h4>
+          <p>We guarantee 99.99% API availability for Enterprise tier clients with financial credits for downtime exceeding this threshold. Infrastructure is monitored 24/7/365 with automatic failover across multiple availability zones. Mean time to recovery (MTTR) < 5 minutes for critical path services.</p>
+        </div>
+        <div>
+          <h4 style="color: #fff; margin-bottom: 10px; font-size: 0.95rem;">Data Security & Compliance</h4>
+          <p style="margin-bottom: 20px;">All data transmission uses TLS 1.3 with perfect forward secrecy. Data at rest is encrypted with AES-256-GCM. Our infrastructure is SOC2 Type II compliant, ISO 27001 certified, and GDPR compliant. We maintain comprehensive audit logs for all API access with immutable blockchain verification.</p>
+          
+          <h4 style="color: #fff; margin-bottom: 10px; font-size: 0.95rem;">Usage Limitations</h4>
+          <p>API rate limits apply per tier: Starter (100 req/min), Professional (1K req/min), Enterprise (10K+ req/min). Systematic scraping or data extraction for competitive analysis is prohibited. All API usage must comply with applicable antitrust and competition laws.</p>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid var(--border); padding-top: 30px; margin-top: 30px;">
+        <p style="margin-bottom: 15px;">
+          <strong style="color: #fff;">Disclaimer:</strong> PriceWars.api provides algorithmic pricing recommendations based on machine learning models trained on historical market data. While our models achieve 98.7% accuracy in backtesting, past performance does not guarantee future results. Clients are solely responsible for final pricing decisions and compliance with all applicable laws and regulations.
+        </p>
+        <p style="margin-bottom: 15px;">
+          <strong style="color: #fff;">Copyright Notice:</strong> © 2026 PriceWars.api Infrastructure LLC. All rights reserved. "PriceWars", "SOTA Engine", "Profit-Guard", and associated logos are registered trademarks of PriceWars.api Infrastructure LLC. Unauthorized use is prohibited.
+        </p>
+        <p>
+          <strong style="color: #fff;">Contact:</strong> For licensing inquiries, enterprise partnerships, or legal questions, contact legal@pricewars.api or call +1 (888) 779-2377. Global headquarters located at 1201 Cyber Drive, Innovation District, San Francisco, CA 94105.
+        </p>
+      </div>
     </div>
   </div>
 </footer>
+
+<script>
+// Mobile navigation toggle
+document.querySelector('.nav-toggle')?.addEventListener('click', function() {
+  document.querySelector('.nav-links')?.classList.toggle('active');
+});
+
+// Close mobile menu when clicking a link
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', function() {
+    document.querySelector('.nav-links')?.classList.remove('active');
+  });
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
 
 </body>
 </html>

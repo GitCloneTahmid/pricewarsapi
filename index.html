@@ -19,7 +19,7 @@
       --font-mono: 'SF Mono', 'Roboto Mono', 'Monaco', monospace; 
     }
 
-    /* HIDE SCROLLBAR DESKTOP */
+    /* HIDE SCROLLBAR DESKTOP BUT RETAIN SCROLLING */
     html {
       -ms-overflow-style: none;
       scrollbar-width: none;
@@ -40,10 +40,10 @@
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
     .section-pad { padding: 100px 0; border-bottom: 1px solid var(--border-subtle); }
     
-    /* Nav */
+    /* Navigation */
     nav {
       position: fixed; top: 0; width: 100%; height: 70px;
-      background: rgba(10, 10, 10, 0.8);
+      background: rgba(10, 10, 10, 0.85);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-subtle);
       z-index: 100;
@@ -56,42 +56,42 @@
     .nav-links a:hover { color: #fff; }
 
     /* Hero */
-    .hero { padding: 180px 0 100px; text-align: left; }
-    .hero h1 { font-size: 4rem; line-height: 1; margin-bottom: 24px; letter-spacing: -2px; }
+    .hero { padding: 180px 0 80px; text-align: left; }
+    .hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 24px; letter-spacing: -2px; }
     .hero p { font-size: 1.25rem; color: var(--text-secondary); max-width: 650px; margin-bottom: 40px; }
 
-    /* LOGO SECTION - FULL VISIBILITY */
-    .brand-strip { 
-      background: #fff; /* White background to ensure all colored logos are visible */
-      padding: 40px 0; 
-      overflow: hidden;
+    /* CLIENT LOGOS - NO FILTERS / FULL VISIBILITY */
+    .brand-section { 
+      background: #ffffff; /* Contrast background for logos */
+      padding: 60px 0; 
       border-top: 1px solid var(--border-subtle);
+      overflow: hidden;
     }
     .logo-track {
       display: flex;
       width: calc(250px * 20);
-      animation: scroll 40s linear infinite;
+      animation: scroll 35s linear infinite;
     }
     .logo-item {
       width: 250px;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 0 40px;
+      padding: 0 45px;
     }
     .logo-item img {
-      max-height: 40px;
+      max-height: 45px;
       width: auto;
-      filter: none !important; /* Forces original colors */
-      opacity: 1 !important;   /* Forces full visibility */
+      /* Removed all filters/opacity to keep them exactly as they were */
+      filter: none;
+      opacity: 1;
     }
     @keyframes scroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(calc(-250px * 10)); }
     }
 
-    /* Python Code Snippets */
-    .code-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+    /* Python Integration Section */
     .code-window {
       background: #000;
       border: 1px solid var(--border-subtle);
@@ -101,67 +101,47 @@
       font-size: 0.9rem;
       color: #d1d1d1;
       overflow-x: auto;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     }
-    .c-kw { color: #569cd6; } /* keyword */
-    .c-st { color: #ce9178; } /* string */
-    .c-fn { color: #dcdcaa; } /* function */
-    .c-cm { color: #6a9955; } /* comment */
+    .c-kw { color: #569cd6; } .c-st { color: #ce9178; } .c-fn { color: #dcdcaa; }
+
+    /* Logic Diagram */
+    .diagram-placeholder {
+        background: #161616;
+        border: 1px dashed #444;
+        padding: 50px;
+        text-align: center;
+        margin-top: 30px;
+        color: var(--text-secondary);
+    }
 
     /* Pricing */
-    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px;}
     .price-card {
       background: var(--bg-panel);
       border: 1px solid var(--border-subtle);
       padding: 40px;
-      border-radius: 4px;
       display: flex; flex-direction: column;
     }
-    .price-card.featured { border-color: var(--accent); position: relative; }
-    .price-card h3 { font-family: var(--font-mono); margin-bottom: 10px; }
-    .price-val { font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; }
-    .price-val span { font-size: 1rem; color: var(--text-secondary); }
-    .feat-list { list-style: none; margin-bottom: 30px; font-size: 0.9rem; color: var(--text-secondary); }
-    .feat-list li { margin-bottom: 12px; }
-    .btn {
-      padding: 12px; text-align: center; border: 1px solid #fff; 
-      background: #fff; color: #000; text-decoration: none; font-weight: 600;
-      transition: 0.2s;
-    }
-    .btn-alt { background: transparent; color: #fff; }
-    .btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .price-card.featured { border-color: var(--accent); }
+    .price-val { font-size: 2.5rem; font-weight: 700; margin: 20px 0; }
 
-    /* Logic/Diagram Section */
-    .diagram-box {
-        margin-top: 40px;
-        background: #161616;
-        border: 1px dashed #333;
-        padding: 60px;
-        text-align: center;
-        color: var(--text-secondary);
-        font-family: var(--font-mono);
-    }
-
-    /* Footer & Modal */
+    /* Footer & Popup */
     footer { padding: 60px 0; border-top: 1px solid var(--border-subtle); text-align: center; }
-    .legal-link { color: var(--text-secondary); font-size: 0.8rem; text-decoration: underline; cursor: pointer; }
+    .legal-trigger { text-decoration: underline; cursor: pointer; color: var(--text-secondary); font-size: 0.85rem; }
     
-    .modal {
+    .modal-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);
-      display: none; justify-content: center; align-items: center; z-index: 1000;
+      background: rgba(0,0,0,0.9); backdrop-filter: blur(8px);
+      display: none; justify-content: center; align-items: center; z-index: 2000;
     }
-    .modal-content {
+    .modal-box {
       background: var(--bg-panel); border: 1px solid var(--border-active);
-      padding: 50px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto;
+      padding: 40px; max-width: 700px; width: 90%; max-height: 80vh; overflow-y: auto;
     }
-    .modal h2 { margin-bottom: 20px; font-family: var(--font-mono); }
-    .modal p { color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem; }
-    .close-btn { float: right; cursor: pointer; font-size: 1.5rem; color: var(--text-secondary); }
 
     @media (max-width: 768px) {
-      .code-grid, .pricing-grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 2.5rem; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.8rem; }
     }
   </style>
 </head>
@@ -171,72 +151,59 @@
     <div class="container nav-inner">
       <div class="logo-text">PRICEWARS.API</div>
       <div class="nav-links">
-        <a href="#integration">SDK</a>
+        <a href="#sdk">Python SDK</a>
         <a href="#logic">Logic</a>
         <a href="#pricing">Pricing</a>
-        <a onclick="toggleModal(true)">Legal & Compliance</a>
       </div>
     </div>
   </nav>
 
-  <section class="hero container">
-    <h1>Autonomous Price<br>Infrastructure.</h1>
-    <p>Engineered for high-volume retail. Execute millisecond-range price adjustments across millions of SKUs while maintaining hard-coded margin safety.</p>
-    <a href="#pricing" class="btn">Get Started</a>
-  </section>
+  <header class="hero container">
+    <h1>Algorithmic Pricing<br>at Global Scale.</h1>
+    <p>The high-frequency infrastructure for competitive pricing. Deploy millisecond-range price adjustments while protecting your bottom line.</p>
+    <a href="#pricing" style="display:inline-block; padding: 15px 30px; background: #fff; color:#000; text-decoration:none; font-weight:700;">Get API Access</a>
+  </header>
 
-  <div class="brand-strip">
+  <div class="brand-section">
     <div class="logo-track">
       <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/amazon-2.svg" alt="Amazon"></div>
       <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/walmart.svg" alt="Walmart"></div>
+      <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/nike-11.svg" alt="Nike"></div>
+      <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/samsung.svg" alt="Samsung"></div>
       <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg" alt="Google"></div>
       <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/shopify.svg" alt="Shopify"></div>
       <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/target-7.svg" alt="Target"></div>
-      <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/best-buy-logo.svg" alt="Best Buy"></div>
       <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/ebay.svg" alt="eBay"></div>
-      <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/nike-11.svg" alt="Nike"></div>
+      <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/best-buy-logo.svg" alt="Best Buy"></div>
       <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/adidas-9.svg" alt="Adidas"></div>
-      <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/samsung.svg" alt="Samsung"></div>
       <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/amazon-2.svg" alt="Amazon"></div>
       <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/walmart.svg" alt="Walmart"></div>
+      <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/nike-11.svg" alt="Nike"></div>
+      <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/samsung.svg" alt="Samsung"></div>
       <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg" alt="Google"></div>
-      <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/shopify.svg" alt="Shopify"></div>
-      <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/target-7.svg" alt="Target"></div>
     </div>
   </div>
 
-  <section id="integration" class="section-pad container">
-    <div class="code-grid">
+  <section id="sdk" class="section-pad container">
+    <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center;">
       <div>
-        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Built for Developers.</h2>
-        <p>Our Python SDK handles the heavy lifting of authentication, rate-limiting, and asynchronous stream management.</p>
+        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Python SDK.</h2>
+        <p>Integrate our pricing engine into your existing stack with three lines of code. Support for asynchronous event loops comes standard.</p>
       </div>
       <div class="code-window">
-<span class="c-kw">import</span> pricewars<br>
-<br>
-<span class="c-cm"># Initialize with your API Key</span><br>
-pw = pricewars.<span class="c-fn">Client</span>(api_key=<span class="c-st">"pw_live_123"</span>)<br>
-<br>
-<span class="c-cm"># Set high-frequency pricing rules</span><br>
-rule = pw.<span class="c-fn">Strategy</span>(<br>
-&nbsp;&nbsp;&nbsp;&nbsp;sku=<span class="c-st">"NIKE-AIR-001"</span>,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;min_margin=<span class="c-st">"15%"</span>,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;follow_market=<span class="c-kw">True</span><br>
-)<br>
-<br>
-<span class="c-kw">await</span> pw.<span class="c-fn">apply</span>(rule)
+        <span class="c-kw">import</span> pricewars_sdk <span class="c-kw">as</span> pw<br><br>
+        <span class="c-fn">client</span> = pw.Client(api_key=<span class="c-st">"pw_prod_99"</span>)<br>
+        <span class="c-fn">strategy</span> = pw.Strategy(sku=<span class="c-st">"SKU-4402"</span>, floor=<span class="c-st">"45.00"</span>)<br><br>
+        <span class="c-kw">await</span> client.reprice(strategy, mode=<span class="c-st">"aggressive"</span>)
       </div>
     </div>
   </section>
 
   <section id="logic" class="section-pad container">
-    <h2 style="text-align: center; margin-bottom: 10px;">The Engine Logic</h2>
-    <p style="text-align: center; margin: 0 auto 40px;">How we transform raw market data into profitable price points.</p>
+    <h2 style="text-align: center;">Pipeline Architecture</h2>
     
-    
-
-    <div class="diagram-box">
-        [ DATA INGESTION ] &rarr; [ COMPETITOR REGRESSION ] &rarr; [ MARGIN GUARD ] &rarr; [ API EMISSION ]
+    <div class="diagram-placeholder">
+        [ MARKET DATA INGESTION ] &rarr; [ MARGIN GUARDRAIL CHECK ] &rarr; [ FINAL PRICE EMISSION ]
     </div>
   </section>
 
@@ -244,60 +211,49 @@ rule = pw.<span class="c-fn">Strategy</span>(<br>
     <div class="pricing-grid">
       <div class="price-card">
         <h3>STARTER</h3>
-        <div class="price-val">$600<span>/mo</span></div>
-        <ul class="feat-list">
-            <li>Up to 10,000 SKUs</li>
-            <li>Hourly market scanning</li>
-            <li>Standard Email Support</li>
-        </ul>
-        <a href="#" class="btn btn-alt">Get Started</a>
+        <div class="price-val">$600<span style="font-size: 1rem; color: #666;">/mo</span></div>
+        <p>For growing merchants.</p>
       </div>
       <div class="price-card featured">
         <h3>BUSINESS</h3>
-        <div class="price-val">$2,500<span>/mo</span></div>
-        <ul class="feat-list">
-            <li>Up to 100,000 SKUs</li>
-            <li>Real-time event triggers</li>
-            <li>Priority 24/7 Support</li>
-        </ul>
-        <a href="#" class="btn">Get Started</a>
+        <div class="price-val">$2,500<span style="font-size: 1rem; color: #666;">/mo</span></div>
+        <p>For market leaders.</p>
       </div>
       <div class="price-card">
         <h3>ENTERPRISE</h3>
         <div class="price-val">Custom</div>
-        <ul class="feat-list">
-            <li>Unlimited Volume</li>
-            <li>Dedicated Node Clusters</li>
-            <li>On-site Integration</li>
-        </ul>
-        <a href="#" class="btn btn-alt">Contact Sales</a>
+        <p>For global agglomerates.</p>
       </div>
     </div>
   </section>
 
   <footer>
     <div class="container">
-      <p style="margin-bottom: 15px;">&copy; 2024 PriceWars API. All Rights Reserved.</p>
-      <span class="legal-link" onclick="toggleModal(true)">Legal, Terms & Privacy Policy</span>
+      <p style="margin-bottom: 20px;">&copy; 2024 PriceWars API. Operating Globally.</p>
+      <span class="legal-trigger" onclick="openLegal()">Terms, Privacy & Legal Information</span>
     </div>
   </footer>
 
-  <div id="legalModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="toggleModal(false)">&times;</span>
-      <h2>Legal & Compliance</h2>
-      <p><strong>Terms of Service:</strong> Use of PriceWars.api is restricted to authorized commercial entities. Scraping or unauthorized reverse-engineering of our proprietary regression models is strictly prohibited.</p>
-      <p><strong>Privacy Policy:</strong> We do not store end-customer data. We only process SKU IDs and market prices. Your internal cost-basis data is encrypted at the hardware level and is never shared with third-party providers.</p>
-      <p><strong>Service Level Agreement:</strong> Business and Enterprise tiers are guaranteed 99.9% uptime. Failure to meet these standards results in automated service credits.</p>
-      <p><strong>Compliance:</strong> Our systems are fully SOC2 Type II and GDPR compliant.</p>
+  <div id="legalModal" class="modal-overlay" onclick="closeLegal(event)">
+    <div class="modal-box">
+      <h2 style="margin-bottom: 20px;">Legal & Compliance</h2>
+      <p><strong>Service Terms:</strong> PriceWars.api provides infrastructure for pricing automation. Clients are responsible for ensuring their pricing strategies comply with local competition and anti-trust laws.</p><br>
+      <p><strong>Privacy:</strong> We operate on a data-minimalism principle. No customer PII is stored. SKU and pricing data are encrypted via AES-256 at rest.</p><br>
+      <p><strong>Fair Use:</strong> Our API usage is subject to rate-limiting to ensure stability across all institutional nodes.</p>
+      <button onclick="document.getElementById('legalModal').style.display='none'" style="margin-top: 30px; padding: 10px 20px; background: #fff; border:none; cursor:pointer;">Close Window</button>
     </div>
   </div>
 
   <script>
-    function toggleModal(show) {
-      const modal = document.getElementById('legalModal');
-      modal.style.display = show ? 'flex' : 'none';
-      document.body.style.overflow = show ? 'hidden' : 'auto';
+    function openLegal() {
+      document.getElementById('legalModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLegal(e) {
+      if(e.target === document.getElementById('legalModal')) {
+        document.getElementById('legalModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
     }
   </script>
 

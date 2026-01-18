@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>PriceWars.api | Institutional Pricing Infrastructure</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Algorithmic pricing infrastructure for high-volume retail and finance. Enterprise-grade latency and margin protection." />
+  <meta name="description" content="Algorithmic pricing infrastructure for high-volume retail and finance." />
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='80'>⚔️</text></svg>">
 
@@ -17,14 +17,23 @@
       --border-active: #444444;
       
       --text-primary: #e5e5e5;
-      --text-secondary: #737373;
-      --text-tertiary: #404040;
+      --text-secondary: #888888;
+      --text-tertiary: #555555;
       
-      --accent: #10b981; /* Muted Signal Green */
-      --accent-dim: rgba(16, 185, 129, 0.1);
+      --accent: #10b981; /* Signal Green */
       
-      --font-stack: 'SF Mono', 'Roboto Mono', 'Monaco', monospace; /* Technical feel */
+      --font-stack: 'SF Mono', 'Roboto Mono', 'Monaco', monospace; 
       --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* HIDE SCROLLBAR BUT ALLOW SCROLLING */
+    html {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+      scroll-behavior: smooth;
+    }
+    body::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -36,6 +45,7 @@
       line-height: 1.5;
       font-size: 16px;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     /* Typography */
@@ -52,7 +62,7 @@
       display: block;
     }
     
-    a { color: inherit; text-decoration: none; transition: 0.2s; }
+    a { color: inherit; text-decoration: none; transition: 0.2s; cursor: pointer; }
     a:hover { color: var(--accent); }
 
     /* Layout Utilities */
@@ -65,15 +75,15 @@
     /* Navigation */
     nav {
       position: fixed; top: 0; left: 0; width: 100%;
-      background: rgba(10, 10, 10, 0.95);
+      background: rgba(10, 10, 10, 0.9);
       border-bottom: 1px solid var(--border-subtle);
       z-index: 1000;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
     }
     .nav-inner {
       height: 70px; display: flex; justify-content: space-between; align-items: center;
     }
-    .brand { font-family: var(--font-stack); font-weight: 700; color: #fff; }
+    .brand { font-family: var(--font-stack); font-weight: 700; color: #fff; letter-spacing: -1px; }
     .nav-links { display: flex; gap: 2rem; font-size: 0.9rem; color: var(--text-secondary); }
     .nav-links a:hover { color: #fff; }
 
@@ -85,17 +95,18 @@
     .stat-item strong { display: block; font-size: 1.5rem; color: #fff; font-family: var(--font-stack); }
     .stat-item span { font-size: 0.85rem; color: var(--text-secondary); }
 
-    /* Components */
+    /* Buttons */
     .btn {
       display: inline-block;
       padding: 12px 24px;
       background: #fff;
       color: #000;
       font-size: 0.9rem;
-      font-weight: 500;
+      font-weight: 600;
       border-radius: 2px;
+      border: 1px solid #fff;
     }
-    .btn:hover { background: var(--text-secondary); }
+    .btn:hover { background: #e5e5e5; border-color: #e5e5e5; }
     
     .btn-outline {
       background: transparent;
@@ -104,23 +115,46 @@
     }
     .btn-outline:hover { border-color: #fff; }
 
-    /* Trusted By (Logos) - Keeping logic exactly as requested */
-    .trust-section { background: #050505; padding: 40px 0; border-bottom: 1px solid var(--border-subtle); overflow: hidden; }
+    /* LOGOS - FULL VISIBILITY */
+    .trust-section { background: #050505; padding: 50px 0; border-bottom: 1px solid var(--border-subtle); overflow: hidden; }
     .logo-slider { width: 100%; overflow: hidden; position: relative; }
     .logo-track { display: flex; width: fit-content; animation: scroll 60s linear infinite; }
     .logo-item { 
-      width: 200px; flex-shrink: 0; padding: 0 30px; 
+      width: 180px; flex-shrink: 0; padding: 0 20px; 
       display: flex; flex-direction: column; align-items: center; justify-content: center;
     }
+    /* Logo Style: Fully opaque, white brightness for dark mode visibility */
     .brand-logo { 
-      height: 30px; width: auto; max-width: 140px; 
-      opacity: 0.3; filter: grayscale(100%) contrast(1.2); 
-      transition: opacity 0.3s; 
+      height: 35px; width: auto; max-width: 140px; 
+      opacity: 1; /* Fully visible */
+      filter: brightness(0) invert(1); /* Make them crisp white */
+      transition: transform 0.3s, filter 0.3s; 
     }
-    .brand-logo:hover { opacity: 0.8; }
-    .logo-stat { display: none; } /* Hidden for minimal cleaner look, per constraints */
+    /* On hover: show original color */
+    .brand-logo:hover { 
+      filter: none; /* Revert to original color */
+      transform: scale(1.1);
+    }
     
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* Code Block */
+    .code-block {
+      background: #000;
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 1.5rem;
+      font-family: var(--font-stack);
+      font-size: 0.85rem;
+      color: #d4d4d4;
+      overflow-x: auto;
+      margin-top: 1rem;
+    }
+    .k { color: #569cd6; } /* Keyword */
+    .s { color: #ce9178; } /* String */
+    .f { color: #dcdcaa; } /* Function */
+    .c { color: #6a9955; } /* Comment */
+    .n { color: #b5cea8; } /* Number */
 
     /* Feature Cards */
     .feature-card {
@@ -131,7 +165,6 @@
     }
     .feature-card:hover { border-color: var(--border-active); }
     .feature-card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; font-family: var(--font-stack); }
-    .feature-card p { font-size: 0.95rem; line-height: 1.6; }
 
     /* Plans */
     .plan-card {
@@ -149,29 +182,60 @@
     }
     .plan-features li::before { content: "›"; color: var(--accent); }
 
-    /* Footer */
-    footer { background: var(--bg-core); padding: 80px 0; font-size: 0.8rem; color: var(--text-tertiary); }
-    .footer-grid { display: grid; grid-template-columns: 1fr 3fr; gap: 4rem; margin-bottom: 4rem; }
-    .legal-block { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-subtle); }
-    .legal-text { margin-bottom: 1.5rem; }
-    .legal-title { color: var(--text-secondary); font-weight: 600; margin-bottom: 0.5rem; display: block; }
-
-    /* Diagram placeholder style */
-    .diagram-placeholder {
-      width: 100%; height: 300px;
+    /* Diagram Placeholder */
+    .diagram-container {
+      width: 100%;
+      height: 250px;
       background: var(--bg-panel);
       border: 1px dashed var(--border-active);
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--text-secondary);
       font-family: var(--font-stack);
-      font-size: 0.8rem;
+      font-size: 0.9rem;
+      margin-top: 2rem;
     }
 
-    /* Mobile */
+    /* Footer */
+    footer { background: var(--bg-core); padding: 80px 0; font-size: 0.8rem; color: var(--text-tertiary); }
+    .footer-grid { display: flex; justify-content: space-between; align-items: flex-end; }
+    
+    /* Modal / Popup */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 9999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-active);
+      width: 90%; max-width: 800px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 3rem;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .close-modal {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-family: var(--font-stack);
+      cursor: pointer; color: var(--text-secondary);
+      background: none; border: none; font-size: 1.2rem;
+    }
+    .close-modal:hover { color: #fff; }
+    .legal-section { margin-bottom: 2.5rem; }
+    .legal-section h3 { color: #fff; font-family: var(--font-stack); margin-bottom: 1rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem; }
+    .legal-section p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem; max-width: none; }
+
     @media (max-width: 768px) {
       .hero h1 { font-size: 2.5rem; }
       .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; }
+      .footer-grid { flex-direction: column; align-items: flex-start; gap: 2rem; }
       .nav-links { display: none; }
     }
   </style>
@@ -182,11 +246,11 @@
     <div class="container nav-inner">
       <div class="brand">PRICEWARS.API</div>
       <div class="nav-links">
-        <a href="#capabilities">Capabilities</a>
-        <a href="#logic">Intelligence Logic</a>
+        <a href="#integration">Integration</a>
+        <a href="#logic">Logic</a>
         <a href="#plans">Access</a>
         <a href="#security">Security</a>
-        <a href="mailto:access@pricewars.api">Contact</a>
+        <a onclick="openLegalModal()">Legal</a>
       </div>
     </div>
   </nav>
@@ -200,7 +264,7 @@
     </p>
     <div style="display: flex; gap: 1rem;">
       <a href="#plans" class="btn">Request API Key</a>
-      <a href="#docs" class="btn btn-outline">Read Documentation</a>
+      <a href="#integration" class="btn btn-outline">View Docs</a>
     </div>
 
     <div class="hero-stats">
@@ -222,78 +286,82 @@
   <section class="trust-section">
     <div class="logo-slider">
       <div class="logo-track">
-         <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/aramco-1.svg" alt="Partner 1" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://www.pngall.com/wp-content/uploads/15/Amazon-Smile-Logo-PNG-Photos.png" alt="Partner 2" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/alphabet-inc-logo-2015.svg" alt="Partner 3" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/microsoft-5.svg" alt="Partner 4" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/960px-Apple_logo_white.svg.png?20220821122232" alt="Partner 5" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Toyota_logo_%28Red%29.svg/1280px-Toyota_logo_%28Red%29.svg.png" alt="Partner 6" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Walmart_logo_%282025%29.svg/1280px-Walmart_logo_%282025%29.svg.png?20250308151853" alt="Partner 7" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/meta-3.svg" alt="Partner 8" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/samsung-electronics.svg" alt="Partner 9" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://picacorp.com/wp-content/uploads/2024/01/Shell_logo.svg.png" alt="Partner 10" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Pirelli_-_logo_full_%28Italy%2C_1997%29.svg/1280px-Pirelli_-_logo_full_%28Italy%2C_1997%29.svg.png" alt="Partner 11" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/bmw-2.svg" alt="Partner 12" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/porsche-2.svg" alt="Partner 13" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/banco-santander-logo.svg" alt="Partner 14" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/premier-league-1.svg" alt="Partner 15" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/mondelez-international-2012-logo.svg" alt="Partner 16" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Adidas-original.svg/960px-Adidas-original.svg.png" alt="Partner 17" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/tencent.svg" alt="Partner 18" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/tsmc-1.svg" alt="Partner 19" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/nvidia-7.svg" alt="Partner 20" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/oracle-6.svg" alt="Partner 21" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/johnson-johnson-4.svg" alt="Partner 22" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Nestle_textlogo_blue.svg/1280px-Nestle_textlogo_blue.svg.png" alt="Partner 23" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://stripeystork.org.uk/wp-content/uploads/2023/01/Unilever.svg.png" alt="Partner 24" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/cvs-3.svg" alt="Partner 25" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/aramco-1.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/amazon-icon.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/microsoft-5.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/apple.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/toyota-1.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/walmart.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/meta-1.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/samsung.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/shell.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/pirelli-2.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/bmw.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/porsche-3.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/santander-1.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/premier-league-1.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/mondelez-international.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/adidas-4.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/tencent.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/nvidia.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/oracle-6.svg" class="brand-logo"></div>
         
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/aramco-1.svg" alt="Partner 1" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://www.pngall.com/wp-content/uploads/15/Amazon-Smile-Logo-PNG-Photos.png" alt="Partner 2" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/alphabet-inc-logo-2015.svg" alt="Partner 3" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/microsoft-5.svg" alt="Partner 4" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/960px-Apple_logo_white.svg.png?20220821122232" alt="Partner 5" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Toyota_logo_%28Red%29.svg/1280px-Toyota_logo_%28Red%29.svg.png" alt="Partner 6" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Walmart_logo_%282025%29.svg/1280px-Walmart_logo_%282025%29.svg.png?20250308151853" alt="Partner 7" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/meta-3.svg" alt="Partner 8" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/samsung-electronics.svg" alt="Partner 9" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://picacorp.com/wp-content/uploads/2024/01/Shell_logo.svg.png" alt="Partner 10" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Pirelli_-_logo_full_%28Italy%2C_1997%29.svg/1280px-Pirelli_-_logo_full_%28Italy%2C_1997%29.svg.png" alt="Partner 11" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/bmw-2.svg" alt="Partner 12" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/porsche-2.svg" alt="Partner 13" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/banco-santander-logo.svg" alt="Partner 14" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/premier-league-1.svg" alt="Partner 15" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/mondelez-international-2012-logo.svg" alt="Partner 16" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Adidas-original.svg/960px-Adidas-original.svg.png" alt="Partner 17" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/tencent.svg" alt="Partner 18" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/tsmc-1.svg" alt="Partner 19" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/nvidia-7.svg" alt="Partner 20" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/oracle-6.svg" alt="Partner 21" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/johnson-johnson-4.svg" alt="Partner 22" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Nestle_textlogo_blue.svg/1280px-Nestle_textlogo_blue.svg.png" alt="Partner 23" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://stripeystork.org.uk/wp-content/uploads/2023/01/Unilever.svg.png" alt="Partner 24" class="brand-logo"></div>
-        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/cvs-3.svg" alt="Partner 25" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/aramco-1.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/amazon-icon.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/microsoft-5.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/apple.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/toyota-1.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/walmart.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/meta-1.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/samsung.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/shell.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/pirelli-2.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/bmw.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/porsche-3.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/santander-1.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/premier-league-1.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/mondelez-international.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/adidas-4.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/tencent.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/nvidia.svg" class="brand-logo"></div>
+        <div class="logo-item"><img src="https://cdn.worldvectorlogo.com/logos/oracle-6.svg" class="brand-logo"></div>
       </div>
     </div>
   </section>
 
-  <section id="capabilities" class="section-pad container">
-    <span class="label">System Capabilities</span>
+  <section id="integration" class="section-pad container">
+    <span class="label">System Integration</span>
     <div class="grid grid-2">
       <div>
-        <h2>High-Velocity Signal Processing.</h2>
+        <h2>Drop-in Python Library.</h2>
         <p style="margin-top: 1rem;">
-          Our infrastructure bypasses traditional scraping limitations using a distributed residential proxy network and headless browser clusters. We ingest pricing vectors, stock levels, and demand signals in near real-time.
+          Integrate high-frequency repricing in minutes using our battle-tested Python SDK. 
+          Support for AsyncIO allows for non-blocking concurrent pricing checks across thousands of SKUs.
         </p>
-      </div>
-      <div class="grid">
-        <div class="feature-card">
-          <h3>Margin Guardrails</h3>
-          <p>Define hard floors and variable elasticity thresholds. The system rejects optimization requests that violate unit economic constraints.</p>
+        <div style="margin-top: 2rem;">
+            <a href="#" class="btn btn-outline">Download SDK</a>
         </div>
-        <div class="feature-card">
-          <h3>Competitor Regression</h3>
-          <p>Our model isolates specific competitor pricing strategies, predicting their repricing intervals with 98.7% accuracy.</p>
+      </div>
+      <div>
+        <div class="code-block">
+<span class="c"># 1. Initialize Client</span>
+<span class="k">import</span> pricewars
+<span class="k">from</span> pricewars <span class="k">import</span> Strategy
+
+<span class="f">client</span> = pricewars.Client(api_key=<span class="s">"pw_live_847382..."</span>)
+
+<span class="c"># 2. Define Margin Guardrails</span>
+<span class="f">strategy</span> = Strategy(
+    sku=<span class="s">"AAPL-14-PRO"</span>,
+    min_margin_percent=<span class="n">12.5</span>,
+    aggressive_mode=<span class="k">True</span>
+)
+
+<span class="c"># 3. Execute Optimization (Async)</span>
+<span class="f">response</span> = <span class="k">await</span> client.optimize(strategy)
+<span class="f">print</span>(<span class="s">f"New Price: {response.price} | Confidence: {response.conf}%"</span>)
         </div>
       </div>
     </div>
@@ -305,9 +373,12 @@
       <div>
         <h2>Deterministic Pricing Models.</h2>
         <p style="margin-top: 1rem; margin-bottom: 2rem;">
-          The PriceWars.api engine utilizes a multi-stage pipeline. Raw market data is normalized, fed into a time-series forecasting model, and checked against your business rules before a price update is emitted via webhook.
+          The PriceWars.api engine utilizes a multi-stage pipeline. Raw market data is normalized, fed into a time-series forecasting model, and checked against your business rules before a price update is emitted.
         </p>
         
+        <div class="diagram-container">
+            [ DIAGRAM VISUALIZATION: INGEST -> NORMALIZE -> OPTIMIZE -> EMIT ]
+        </div>
       </div>
       <div class="grid">
         <div class="feature-card">
@@ -340,9 +411,8 @@
           <li>15-minute Refresh Rate</li>
           <li>Standard Margin Guards</li>
           <li>REST API Access</li>
-          <li>Email Support</li>
         </ul>
-        <a href="#" class="btn btn-outline" style="margin-top: auto;">Select Plan</a>
+        <a href="mailto:sales@pricewars.api?subject=Starter" class="btn btn-outline" style="margin-top: auto;">Select Plan</a>
       </div>
 
       <div class="plan-card" style="border-color: var(--accent);">
@@ -356,9 +426,8 @@
           <li>Real-time (Stream) Updates</li>
           <li>Advanced Competitor Regression</li>
           <li>Dedicated IP Pools</li>
-          <li>Priority Support SLA</li>
         </ul>
-        <a href="#" class="btn" style="margin-top: auto; background: var(--accent); color: #000; border: none;">Select Plan</a>
+        <a href="mailto:sales@pricewars.api?subject=Business" class="btn" style="margin-top: auto; background: var(--accent); color: #000; border: none;">Select Plan</a>
       </div>
 
       <div class="plan-card">
@@ -372,9 +441,8 @@
           <li>On-Premise / Private Cloud</li>
           <li>Custom ML Model Training</li>
           <li>Dedicated Solutions Engineer</li>
-          <li>99.99% Uptime Guarantee</li>
         </ul>
-        <a href="mailto:sales@pricewars.api" class="btn btn-outline" style="margin-top: auto;">Contact Sales</a>
+        <a href="mailto:sales@pricewars.api?subject=Enterprise" class="btn btn-outline" style="margin-top: auto;">Contact Sales</a>
       </div>
     </div>
   </section>
@@ -402,59 +470,58 @@
   </section>
 
   <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h4 class="brand" style="margin-bottom: 1rem;">PRICEWARS.API</h4>
-          <p>
-            London • New York • Singapore<br>
-            <span class="mono">sys_status: nominal</span>
-          </p>
-        </div>
-        <div class="grid grid-3" style="font-size: 0.85rem;">
-          <div>
-            <span class="label">Product</span>
-            <a href="#" style="display:block; margin-bottom:0.5rem;">API Reference</a>
-            <a href="#" style="display:block; margin-bottom:0.5rem;">Integrations</a>
-            <a href="#" style="display:block; margin-bottom:0.5rem;">SLA Status</a>
-          </div>
-          <div>
-            <span class="label">Company</span>
-            <a href="#" style="display:block; margin-bottom:0.5rem;">About</a>
-            <a href="#" style="display:block; margin-bottom:0.5rem;">Careers</a>
-            <a href="#" style="display:block; margin-bottom:0.5rem;">Contact</a>
-          </div>
-        </div>
+    <div class="container footer-grid">
+      <div>
+        <h4 class="brand" style="margin-bottom: 1rem;">PRICEWARS.API</h4>
+        <p>
+          <span class="mono">sys_status: nominal</span>
+        </p>
       </div>
-
-      <div class="legal-block">
-        <span class="legal-title">1. Terms & Conditions</span>
-        <p class="legal-text">
-          By accessing the PriceWars.api ("Service"), you agree to be bound by these Terms. The Service is provided for lawful intelligence and pricing optimization purposes only. You are strictly prohibited from using the Service for market manipulation, collusion, or any activity that violates antitrust laws in your jurisdiction. We reserve the right to terminate access immediately if abusive querying patterns or scraping of our intellectual property is detected.
-        </p>
-
-        <span class="legal-title">2. Privacy Policy</span>
-        <p class="legal-text">
-          We collect minimal usage data required for API billing and rate limiting. We do not sell, trade, or transfer your proprietary pricing data to third parties. Your SKU lists, cost inputs, and margin thresholds are treated as highly confidential trade secrets. Data is stored on AWS servers located in the US-East region unless a specific residency is requested via Enterprise contract.
-        </p>
-
-        <span class="legal-title">3. Data Usage & Neutrality</span>
-        <p class="legal-text">
-          PriceWars.api acts as a neutral infrastructure provider. We do not aggregate client data to create "market averages" or shared insights. Your data is siloed logically and physically from other tenants. We utilize a read-only access pattern for competitor websites to ensure compliance with their robots.txt where applicable, or utilize licensed data feeds where scraping is restricted.
-        </p>
-
-        <span class="legal-title">4. Compliance & Risk</span>
-        <p class="legal-text">
-          Our algorithms are deterministic and audit-logged. In the event of a pricing error or "race to the bottom" scenario, our system includes a mandatory "Circuit Breaker" feature that halts updates if price variance exceeds defined safety parameters (default 15%). You maintain full legal liability for the final prices displayed to your consumers.
-        </p>
-
-        <div style="margin-top: 3rem; border-top: 1px solid var(--border-subtle); padding-top: 1rem; display: flex; justify-content: space-between;">
-          <span>© 2024 PriceWars Intelligence Ltd. All rights reserved.</span>
-          <span class="mono">v.4.2.0</span>
-        </div>
+      <div>
+        <a onclick="openLegalModal()" style="text-decoration: underline; color: var(--text-secondary); cursor: pointer;">Legal & Compliance Repository</a>
       </div>
     </div>
   </footer>
+
+  <div id="legal-modal" class="modal-overlay" onclick="closeLegalModal(event)">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeLegalModal(event)">✕</button>
+      
+      <div class="legal-section">
+        <h3>1. Terms & Conditions</h3>
+        <p>By accessing the PriceWars.api ("Service"), you agree to be bound by these Terms. The Service is provided for lawful intelligence and pricing optimization purposes only. You are strictly prohibited from using the Service for market manipulation, collusion, or any activity that violates antitrust laws in your jurisdiction.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>2. Privacy Policy</h3>
+        <p>We collect minimal usage data required for API billing and rate limiting. We do not sell, trade, or transfer your proprietary pricing data to third parties. Your SKU lists, cost inputs, and margin thresholds are treated as highly confidential trade secrets. Data is stored on AWS servers located in the US-East region unless a specific residency is requested via Enterprise contract.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>3. Data Usage & Neutrality</h3>
+        <p>PriceWars.api acts as a neutral infrastructure provider. We do not aggregate client data to create "market averages" or shared insights. Your data is siloed logically and physically from other tenants. We utilize a read-only access pattern for competitor websites to ensure compliance with their robots.txt where applicable.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>4. Compliance & Risk Notice</h3>
+        <p>Our algorithms are deterministic and audit-logged. In the event of a pricing error or "race to the bottom" scenario, our system includes a mandatory "Circuit Breaker" feature that halts updates if price variance exceeds defined safety parameters (default 15%). You maintain full legal liability for the final prices displayed to your consumers.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openLegalModal() {
+      document.getElementById('legal-modal').style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // Stop background scrolling
+    }
+
+    function closeLegalModal(event) {
+      if (event.target === document.getElementById('legal-modal') || event.target.classList.contains('close-modal')) {
+        document.getElementById('legal-modal').style.display = 'none';
+        document.body.style.overflow = 'auto'; // Restore scrolling
+      }
+    }
+  </script>
 
 </body>
 </html>

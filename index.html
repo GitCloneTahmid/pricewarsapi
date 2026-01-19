@@ -137,6 +137,19 @@
     .modal li { margin-bottom: 0.5rem; color: var(--text-secondary); padding-left: 1.25rem; position: relative; }
     .modal li::before { content: "•"; color: var(--accent); position: absolute; left: 0; }
 
+/* Target the modal content area to hide scrollbars */
+.modal-content {
+  /* For Firefox */
+  scrollbar-width: none; 
+  /* For Internet Explorer and Edge */
+  -ms-overflow-style: none; 
+}
+
+/* For Chrome, Safari, and Opera */
+.modal-content::-webkit-scrollbar {
+  display: none;
+}
+
     @media (max-width: 768px) {
       .hero h1 { font-size: 2.5rem; }
       .grid-2, .grid-3, .footer-grid { grid-template-columns: 1fr; }
